@@ -9,5 +9,18 @@ async function fetchData<T>(url: string): Promise<T> {
   }
 }
 
-const results = fetchData('https://jsonplaceholder.typicode.com/todos/1');
-console.log(results);
+
+interface IFetchedTodos{
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean
+}
+
+fetchData<IFetchedTodos[]>('https://jsonplaceholder.typicode.com/todos')
+.then((results) => {
+  console.log('Received data:', results);
+})
+.catch((error) => {
+  console.error('Error fetching data:', error.message);
+});
